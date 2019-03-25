@@ -1,9 +1,28 @@
 const { app, BrowserWindow } = require('electron')
+const path = require('path')
+const debug = /--debug/.test(process.argv[2])
 
 function createWindow () {
-    let win = new BrowserWindow({ width: 800, height: 600 })
+    const windowOptions = {
+        width: 1200,
+        height: 960,
+        minWidth: 1080,
+        title: app.getName(),
+        center: true,
+        resizable: true,
+        closable: true,
+        icon: path.resolve(__dirname, '/app.ico'),
+        backgroundColor: '#f0f0f0',
+        hasShadow: true,
+        webPreferences: {
+            nodeIntegration: true
+        }
+    }
+    let win = new BrowserWindow(windowOptions)
     win.loadFile('./react-dev/dist/index.html')
-    win.webContents.openDevTools()
+    if (debug) {
+        win.webContents.openDevTools()
+    }
     win.on('closed', () => {
         win = null
     })

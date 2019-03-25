@@ -33,7 +33,7 @@ const MiniCssExtractPluginLoader = (options) => {
 }
 
 module.exports = {
-    entry: './src/index.js',
+    entry: ['./src/index.js'],
     output: {
         filename: '[name].[hash].js',
         path: path.join(__dirname, '../dist')
@@ -78,5 +78,6 @@ module.exports = {
             filename: devMode ? '[name].css' : '[name].[hash].css',
             chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
         })
-    ]
+    ],
+    target: 'electron-renderer'
 }

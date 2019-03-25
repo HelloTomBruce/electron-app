@@ -4,10 +4,12 @@ import AppLayout from './layout/app'
 import ImgDisplay from './component/img'
 import SvgIcon from '@/component/svgIcon'
 import './page-less/index.css'
+import getVersion from './render-process'
 
 class App extends Component {
     constructor(props) {
         super(props)
+        getVersion()
     }
 
     render () {

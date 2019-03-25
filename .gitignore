@@ -1,5 +1,5 @@
 node_modules
 electron-exe
-./react-dev/node_modules
-./react-dev/dist
-./react-dev/.vscode
+react-dev/node_modules
+react-dev/dist/
+react-dev/.vscode
