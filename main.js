@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require('electron')
+const ipcMain = require('electron').ipcMain
 const path = require('path')
 const debug = /--debug/.test(process.argv[2])
 
@@ -40,4 +41,14 @@ app.on('activate', () => {
     if (win === null) {
         createWindow()
     }
+})
+
+ipcMain.on('asynchronous-message', function(event, arg) {
+    console.log(arg)
+    event.sender.send('asynchronous-reply', 'pong')
+})
+
+ipcMain.on('synchronous-message', (event, arg) => {
+    console.log(arg)
+    event.returnValue = 'pong'
 })

@@ -79,5 +79,5 @@ module.exports = {
             chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
         })
     ],
-    target: 'electron-renderer'
+    target: devMode ? 'web' : 'electron-renderer'
 }
