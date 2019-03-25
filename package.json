@@ -7,9 +7,10 @@
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "张盈武 <1316727932@qq.com>",
   "license": "ISC",
   "devDependencies": {
     "electron": "^4.1.1"
-  }
+  },
+  "repository": "https://github.com/Tomzhang12138/electron-app.git"
 }
