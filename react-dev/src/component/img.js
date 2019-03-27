@@ -1,21 +1,45 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
+const mapStateToProps = state => {
+    return {
+        list: state.musicSheet.list
+    }
+}
 class ImgDisplay extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            url: 'https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=7e685ef2f903918fc8d13bca613d264b/b3119313b07eca80787730f59f2397dda14483b5.jpg'
+            index: 0
         }
     }
-    render () {
-        let style = {
-            width: this.props.width,
-            height: this.props.height
+    componentDidMount () {
+        this.setState({
+            index: this.props.match.params.id
+        })
+    }
+    renderImgList = () => {
+        if (!this.props.list[this.state.index]) {
+            return null
         }
+        console.log(this.props.match.params)
         return (
-            <img src={this.state.url} style={style}/>
+            <div>
+                {this.props.list[this.state.index].fileArr.map((item, index) => {
+                    return (
+                        <img src={item.path} key={index}/>
+                    )
+                })}
+            </div>
+        )
+    }
+    render () {
+        return (
+            <div>
+                {this.renderImgList()}
+            </div>
         )
     }
 }
 
-export default ImgDisplay
+export default connect(mapStateToProps)(ImgDisplay)
