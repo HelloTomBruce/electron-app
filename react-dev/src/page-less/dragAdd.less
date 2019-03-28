@@ -1,0 +1,105 @@
+.add-music-sheet {
+    .drag-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        min-height: 450px;
+        margin: 10px auto;
+        padding-bottom: 45px;
+        font-size: 30px;
+        color: #ebecf6;
+        border: 1px solid lightgreen;
+        &:hover {
+            color: lightgreen;
+        }
+        .icon {
+            margin-right: 10px;
+        }
+        .file-list {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: inline-flex;
+            width: 100%;
+            flex-flow: row wrap;
+            justify-content: flex-start;
+            align-items: center;
+            .img-file-one {
+                margin: 10px;
+                position: relative;
+                cursor: move;
+                h5 {
+                    margin: 0;
+                    height: 20px;
+                    line-height: 20px;
+                    font-size: 14px;
+                }
+                img {
+                    width: 200px;
+                    height: 300px;
+                }
+                .close-icon {
+                    position: absolute;
+                    display: none;
+                    top: 0px;
+                    right: 0px;
+                    font-size: 16px;
+                    color: #fff;
+                    cursor: pointer;
+                }
+                &:hover {
+                    .close-icon {
+                        display: block;
+                    }
+                }
+            }
+        }
+        .add-to-store {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            display: block;
+        }
+    }
+    .file-list {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: inline-flex;
+        width: 100%;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        align-items: center;
+        .img-file-one {
+            margin: 10px;
+            position: relative;
+            cursor: move;
+            h5 {
+                margin: 0;
+                height: 20px;
+                line-height: 20px;
+                font-size: 14px;
+            }
+            img {
+                width: 200px;
+                height: 300px;
+            }
+            .close-icon {
+                position: absolute;
+                display: none;
+                top: 0px;
+                right: 0px;
+                font-size: 16px;
+                color: #fff;
+                cursor: pointer;
+            }
+            &:hover {
+                .close-icon {
+                    display: block;
+                }
+            }
+        }
+    }
+}

@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Draggable from 'react-draggable'
+import '@/page-less/imgDisplay.less'
 
 const mapStateToProps = state => {
     return {
@@ -22,12 +24,18 @@ class ImgDisplay extends React.Component {
         if (!this.props.list[this.state.index]) {
             return null
         }
-        console.log(this.props.match.params)
         return (
-            <div>
+            <div className='img-display-container'>
                 {this.props.list[this.state.index].fileArr.map((item, index) => {
                     return (
-                        <img src={item.path} key={index}/>
+                        <Draggable
+                            axis="both"
+                            handle='.img-one'
+                            scale={1}
+                            bounds="parent"
+                        >
+                            <img className='img-one' src={item.path} key={index}/>
+                        </Draggable>
                     )
                 })}
             </div>
