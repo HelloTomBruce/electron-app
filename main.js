@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, Menu } = require('electron')
 const ipcMain = require('electron').ipcMain
 const path = require('path')
 const debug = /--debug/.test(process.argv[2])
@@ -20,6 +20,19 @@ function createWindow () {
         }
     }
     let win = new BrowserWindow(windowOptions)
+    menuConfig = [
+        {
+            role: 'help',
+            submenu: [
+              {
+                label: 'Learn More',
+                click () { require('electron').shell.openExternal('https://electronjs.org') }
+              }
+            ]
+        }
+    ]
+    const menu = Menu.buildFromTemplate(menuConfig)
+    Menu.setApplicationMenu(menu)
     win.loadFile('./react-dev/dist/index.html')
     if (debug) {
         win.webContents.openDevTools()
