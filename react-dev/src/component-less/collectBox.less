@@ -1,0 +1,28 @@
+.collect-box-container {
+    display: flex;
+    flex-flow: row wrap;
+    border: 1px solid lightgreen;
+    .collect-box-switch {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        background: #f0f0f0;
+    }
+    .collect-box-list {
+        flex: 1;
+        &.flex {
+            display: flex;
+            flex-flow: column wrap;
+            justify-content: flex-start;
+            overflow-y: auto;
+        }
+        &.inline {
+            display: inline-flex;
+            flex-flow: row nowrap;
+            overflow-x: auto;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+    }
+}

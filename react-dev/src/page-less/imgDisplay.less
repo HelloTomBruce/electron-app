@@ -1,9 +1,57 @@
-.img-display-container {
+.img-display {
+    position: relative;
     height: 100%;
-    img {
-        margin: 10px;
-        width: auto;
-        height: auto;
-        cursor: pointer;
+    overflow: hidden;
+    .img-view-container {
+        height: 100%;
+        position: relative;
+        text-align: center;
+        overflow: auto;
+        img {
+            margin: 10px;
+            width: auto;
+            height: auto;
+            cursor: pointer;
+        }
+    }
+    .right-list {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        background: #f0f0f0;
+        z-index: 10;
+    }
+    .prev-btn, .next-btn {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 50%;
+        margin-top: -20px;
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 50%;
+    }
+    .prev-btn {
+        left: 0;
+    }
+    .next-btn {
+       right: 0;
+    }
+    .bottom-operate {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .bottom-operate-one {
+            width: 45px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+        }
     }
 }
