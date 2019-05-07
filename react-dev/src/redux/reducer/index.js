@@ -1,14 +1,12 @@
-import { combineReducers } from 'redux'
-import count from './counter.js'
-import list from './list.js'
-import login from './login'
+import { combineReducers } from "redux";
+import list from "./list.js";
+import error from "./error";
 import musicSheet from './musicSheet'
 
 const rootReducer = combineReducers({
-    count,
     list,
-    login,
-    musicSheet
-})
+    musicSheet,
+    error
+});
 
-export default rootReducer
+export default rootReducer;

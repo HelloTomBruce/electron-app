@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Draggable from 'react-draggable'
 import SvgIcon from '@/component/svgIcon'
 import BottomOperate from './bottomOperate'
-import '@/page-less/imgDisplay.less'
+import './imgDisplay.less'
 
 const mapStateToProps = state => {
     return {

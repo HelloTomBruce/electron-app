@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { addOne } from '@/redux/action/musicSheet'
 import { Input, Button, Modal, message } from 'antd'
-import SvgIcon from '@/component/svgIcon'
+import SvgIcon from '@/component/SvgIcon'
 import { DragAddContext } from './context'
 import DragFileGrid from './dragFileGrid'
-import '@/page-less/dragAdd.less'
+import './dragAdd.less'
 
 const mapStateToProps = state => ({})
 

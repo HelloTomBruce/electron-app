@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import AppLayout from './layout/app'
+import { hot } from "react-hot-loader";
+import ErrorTip from "@/component/ErrorTip";
+import ErrorBoundary from "@/component/ErrorBoundary";
+import AppLayout from '@/layout/app'
+import "@/style/index.less";
 //import getVersion from './render-process'
 
 class App extends Component {
@@ -11,11 +15,16 @@ class App extends Component {
 
     render () {
         return (
-            <AppLayout/>
+            <div className="app-container">
+                <ErrorTip />
+                <ErrorBoundary>
+                    <AppLayout />
+                </ErrorBoundary>
+            </div>
         )
     }
 }
 
-const mapStateToProps = state => ({})
+const mapStateToProps = () => ({});
 
-export default connect(mapStateToProps)(App)
+export default hot(module)(connect(mapStateToProps)(App));

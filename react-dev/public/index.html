@@ -2,6 +2,11 @@
 <html>
     <head>
         <meta charset="utf-8"/>
+        <link type="image/x-icon" rel="shortcut icon" href="./favicon.ico"/>
+        <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+        <% for (var name in htmlWebpackPlugin.files.css) { %>
+            <link type="text/css" rel="stylesheet" href=".<%=htmlWebpackPlugin.files.css[name]%>"/>
+        <% } %>
         <title>react-webpack</title>
         <script type="text/javascript" src="https://at.alicdn.com/t/font_519743_k9q2pwd2ju.js"></script>
     </head>
@@ -9,7 +14,7 @@
         <div id="root"></div>
         <div id='dialog-root'></div>
     </body>
-    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
-        <script type="text/javascript" src="./<%=htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+    <% for (var name in htmlWebpackPlugin.files.js) { %>
+        <script type="text/javascript" src=".<%=htmlWebpackPlugin.files.js[name]%>"></script>
     <% } %>
 </html>

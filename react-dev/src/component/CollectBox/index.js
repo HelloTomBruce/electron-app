@@ -1,6 +1,6 @@
 import React from 'react'
-import SvgIcon from '@/component/svgIcon'
-import '@/component-less/collectBox.less'
+import SvgIcon from '@/component/SvgIcon'
+import './index.less'
 
 class CollectBox extends React.Component {
     constructor(props) {

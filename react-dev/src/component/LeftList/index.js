@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { initList } from '@/redux/action/musicSheet'
 import { getLocalItem } from '@/redux/local'
-import SvgIcon from '@/component/svgIcon'
-import '@/component-less/leftList.less'
+import SvgIcon from '@/component/SvgIcon'
+import './index.less'
 
 const defaultList = [
     {

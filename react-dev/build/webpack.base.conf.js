@@ -1,83 +1,133 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const devMode = process.env.NODE_ENV !== 'production'
+const path = require("path");
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlIncludeAssetsPlugin = require("html-webpack-include-assets-plugin");
+const devMode = process.env.NODE_ENV !== "production";
 
 const postCssLoader = {
-    loader: 'postcss-loader',
+    loader:  "postcss-loader",
     options: {
-        plugins: [require('autoprefixer')]
+        plugins: [require("autoprefixer")]
     }
-}
+};
 
-const lessLoader =  {
-    loader: 'less-loader',
-    options: { javascriptEnabled: true}
-}
+const lessLoader = {
+    loader:  "less-loader",
+    options: { javascriptEnabled: true }
+};
 
-const cssLoader = (options) => {
+const cssLoader = options => {
     return {
-        loader: 'css-loader',
-        options: {...options}
-    }
-}
+        loader:  "css-loader",
+        options: { ...options }
+    };
+};
 
-const MiniCssExtractPluginLoader = (options) => {
+const MiniCssExtractPluginLoader = options => {
     return {
-        loader: MiniCssExtractPlugin.loader,
-        options: Object.assign({
-            publicPath: path.resolve(__dirname, '/src/page/less')
-        }, options)
-    }
-}
+        loader:  MiniCssExtractPlugin.loader,
+        options: Object.assign(
+            {
+                publicPath: "../../"
+            },
+            options
+        )
+    };
+};
 
 module.exports = {
-    entry: ['./src/index.js'],
+    entry:  ["./src/index.js"],
     output: {
-        filename: '[name].[hash].js',
-        path: path.join(__dirname, '../dist')
+        filename:   "assets/js/[name].[hash].js",
+        path:       path.join(__dirname, "../dist"),
+        publicPath: "/"
     },
     module: {
         rules: [
             {
                 test: /\.css$/,
-                use: [devMode ? 'style-loader' : MiniCssExtractPluginLoader(), cssLoader({ importLoaders: 1}), postCssLoader]
+                use:  [
+                    devMode ? "style-loader" : MiniCssExtractPluginLoader(),
+                    cssLoader({ importLoaders: 1 }),
+                    postCssLoader
+                ]
             },
             {
                 test: /\.less$/,
-                use: [devMode ? 'style-loader' : MiniCssExtractPluginLoader(), cssLoader({ importLoaders: 2}), postCssLoader, lessLoader]
+                use:  [
+                    devMode ? "style-loader" : MiniCssExtractPluginLoader(),
+                    cssLoader({ importLoaders: 2 }),
+                    postCssLoader,
+                    lessLoader
+                ]
             },
             {
                 test: /\.js$/,
-                use: [
+                use:  [
                     {
-                        loader: 'babel-loader'
+                        loader: "babel-loader?cacheDirectory"
                     }
                 ],
-                exclude: /node_modules/
+                exclude: /node_modules/,
+                include: path.resolve(__dirname, "../src")
             },
             {
                 test: /\.json$/,
-                use: ['json-loader']
+                use:  ["json-loader"]
+            },
+            {
+                test:    /\.(graphql|gql)$/,
+                exclude: /node_modules/,
+                use:     [{ loader: "graphql-tag/loader" }]
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif)$/,
+                use:  [
+                    {
+                        loader:  "url-loader",
+                        options: {
+                            limit:      8192,
+                            outputPath: "assets/img",
+                            name() {
+                                if (devMode) {
+                                    return "[name].[ext]";
+                                }
+                                return "[hash].[ext]";
+                            }
+                        }
+                    }
+                ]
             }
         ]
     },
     resolve: {
-        alias: {
-            '@': path.resolve(__dirname, '../src')
-        }
+        modules: ["node_modules"],
+        alias:   {
+            "@": path.resolve(__dirname, "../src")
+        },
+        extensions: [".js"]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './public/index.html',
-            inject: false
+            template: "./public/index.html",
+            inject:   false
         }),
-        new CleanWebpackPlugin(['dist']),
         new MiniCssExtractPlugin({
-            filename: devMode ? '[name].css' : '[name].[hash].css',
-            chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+            filename: devMode
+                ? "assets/css/[name].css"
+                : "assets/css/[name].[hash].css",
+            chunkFilename: devMode
+                ? "assets/css/[id].css"
+                : "assets/css/[id].[hash].css"
+        }),
+        new webpack.DllReferencePlugin({
+            manifest: require("../dist/assets/dll/react.manifest.json")
+        }),
+        new HtmlIncludeAssetsPlugin({
+            assets: ["assets/dll/react.dll.js"],
+            append: false
         })
-    ],
-    target: devMode ? 'web' : 'electron-renderer'
-}
+    ]
+};

@@ -1,5 +1,5 @@
 import React from 'react'
-import SvgIcon from '@/component/svgIcon'
+import SvgIcon from '@/component/SvgIcon'
 
 class BottomOperate extends React.Component {
     constructor(props) {
