@@ -16,21 +16,14 @@ function createWindow () {
         backgroundColor: '#f0f0f0',
         hasShadow: true,
         webPreferences: {
-            nodeIntegration: true
-        }
+            nodeIntegration: true,
+            webSecurity: false
+        },
+        // frame:false,  // 隐藏状态栏
+        // titleBarStyle: 'hidden'  //mac隐藏状态栏
     }
     let win = new BrowserWindow(windowOptions)
-    menuConfig = [
-        {
-            role: 'help',
-            submenu: [
-              {
-                label: 'Learn More',
-                click () { require('electron').shell.openExternal('https://electronjs.org') }
-              }
-            ]
-        }
-    ]
+    menuConfig = []
     const menu = Menu.buildFromTemplate(menuConfig)
     Menu.setApplicationMenu(menu)
     win.loadFile('./react-dev/dist/index.html')
