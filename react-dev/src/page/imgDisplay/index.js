@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Draggable from 'react-draggable'
-import SvgIcon from '@/component/svgIcon'
+import SvgIcon from '@/component/SvgIcon'
 import BottomOperate from './bottomOperate'
 import './imgDisplay.less'
 

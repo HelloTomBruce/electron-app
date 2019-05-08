@@ -1,102 +1,42 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { initList } from '@/redux/action/musicSheet'
-import { getLocalItem } from '@/redux/local'
 import SvgIcon from '@/component/SvgIcon'
 import './index.less'
+import SheetList from '../SheetList';
 
-const defaultList = [
-    {
-        name: '示例',
-        fileArr: [
-            {
-                name: '图片一',
-                path: 'https://picsum.photos/400/700/?random'
-            },
-            {
-                name: '图片二',
-                path: 'https://picsum.photos/400/700/?random'
-            },
-            {
-                name: '图片三',
-                path: 'https://picsum.photos/400/700/?random'
-            }
-        ]
-    },
-    {
-        name: '示例',
-        fileArr: [
-            {
-                name: '图片一',
-                path: 'https://picsum.photos/400/700/?random'
-            },
-            {
-                name: '图片二',
-                path: 'https://picsum.photos/400/700/?random'
-            },
-            {
-                name: '图片三',
-                path: 'https://picsum.photos/400/700/?random'
-            }
-        ]
-    },
-    {
-        name: '示例',
-        fileArr: [
-            {
-                name: '图片一',
-                path: 'https://picsum.photos/400/700/?random'
-            },
-            {
-                name: '图片二',
-                path: 'https://picsum.photos/400/700/?random'
-            },
-            {
-                name: '图片三',
-                path: 'https://picsum.photos/400/700/?random'
-            }
-        ]
-    }
-]
 
-const mapStateToProps = state => {
-    return {
-        list: state.musicSheet.list
-    }
+const mapStateToProps = () => {
+    return {}
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        initList: (list) => dispatch(initList(list))
-    }
+const mapDispatchToProps = () => {
+    return {}
 }
 class LeftList extends React.Component {
     constructor(props) {
         super(props)
-    }
-    componentWillMount () {
-        let list = JSON.parse(getLocalItem('musicSheet'))
-        if (list.length === 0) {
-            list = defaultList
+        this.state = {
+            leftIsHide: false
         }
-        this.props.initList(list)
     }
+    toggleHideLeft = () => {
+        this.setState({
+          leftIsHide: !this.state.leftIsHide
+        })
+    }
+    componentDidMount () {}
     render () {
+        const { leftIsHide } = this.state
         return (
-            <div className='sheet-music-list' style={{display: this.props.hidden ? 'none' : 'block'}}>
-                <div className='add-sheet-music'>
-                    <Link to='/'>
-                        <SvgIcon iconClass='icon-Add'/>添加曲谱
-                    </Link>
+            <div className='left-list' style={{width: leftIsHide ? '25px' : '350px'}}>
+                <div className='left-list-switch' onClick={this.toggleHideLeft}>
+                    <span className="switch-icon">
+                        <SvgIcon iconClass={leftIsHide ? 'icon-right' : 'icon-left'}/>
+                    </span>
                 </div>
-                {this.props.list.map((item, index) => {
-                    return (
-                        <div className='sheet-music-one' key={index}>
-                            <Link to={`/view/${index}`}>{item.name}</Link>
-                        </div>
-                    )
-                })}
+                <SheetList/>
+                <div className="bottom-swiper">
+                </div>
             </div>
         )
     }

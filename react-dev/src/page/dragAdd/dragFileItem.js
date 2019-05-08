@@ -1,7 +1,7 @@
 import React from 'react'
 import { sortable } from 'react-sortable'
 import { DragAddContext } from './context'
-import SvgIcon from '@/component/svgIcon'
+import SvgIcon from '@/component/SvgIcon'
 
 class DragFileItem extends React.Component {
     constructor(props) {
