@@ -1,6 +1,11 @@
 import { put, takeLatest, call } from 'redux-saga/effects'
 import { GET_LIST, GET_SUCCESS, GET_ERROR } from '../action-type/list'
-import { getList } from '../../api'
+
+import axios from 'axios'
+
+export const getList = (url) => {
+    return axios.get(url)
+}
 
 function* watchGetList () {
     yield takeLatest(GET_LIST, fetchData)

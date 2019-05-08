@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addOne } from '@/redux/action/musicSheet'
-import { Input, Button, Modal, message } from 'antd'
+import { message } from 'antd'
 import SvgIcon from '@/component/SvgIcon'
 import { DragAddContext } from './context'
 import DragFileGrid from './dragFileGrid'
 import './dragAdd.less'
 
-const mapStateToProps = state => ({})
+const mapStateToProps = () => ({})
 
 const mapDispatchToProps = dispatch => ({
     addOne: (sheet) => dispatch(addOne(sheet))
@@ -31,8 +31,17 @@ class DragAddFile extends React.Component {
                 }
             ],
             name: '',
-            nameDialogVisible: false
         }
+    }
+    componentDidMount () {
+        this.setState({
+            name: this.state.fileArr[0].name
+        })
+    }
+    handleInput = (e) => {
+        this.setState({
+            name: e.target.value
+        })
     }
     handleDragEnd = (e) => {
         e.preventDefault()
@@ -49,30 +58,11 @@ class DragAddFile extends React.Component {
         }
         return false
     }
-    handleInputName = (e) => {
-        let value = e.target.value
-        this.setState({
-            name: value
-        })
-    }
     addToStore = () => {
         if (this.state.fileArr.length <= 0) {
             message.warn('请先添加文件')
             return
         }
-        this.setState({
-            nameDialogVisible: true
-        })
-    }
-    removeOneImg = (e, index) => {
-        e.preventDefault()
-        let fileArr = [...this.state.fileArr]
-        fileArr.splice(index, 1)
-        this.setState({
-            fileArr
-        })
-    }
-    handleOk = () => {
         let sheet = {
             name: this.state.name || this.state.fileArr[0].name,
             fileArr: this.state.fileArr
@@ -84,9 +74,12 @@ class DragAddFile extends React.Component {
             nameDialogVisible: false
         })
     }
-    handleCancel = () => {
+    removeOneImg = (e, index) => {
+        e.preventDefault()
+        let fileArr = [...this.state.fileArr]
+        fileArr.splice(index, 1)
         this.setState({
-            nameDialogVisible: false
+            fileArr
         })
     }
     onSortFiles = (fileArr) => {
@@ -103,6 +96,7 @@ class DragAddFile extends React.Component {
         }
         return (
             <div className='add-music-sheet'>
+                <input type="text" defaultValue={this.state.name} onInput={this.handleInput} className='name-input'/>
                 <div className='drag-container'
                     draggable={true}
                     onDragOver={this.handleDragEnd}
@@ -116,19 +110,11 @@ class DragAddFile extends React.Component {
                     </div>
                     <DragAddContext.Provider value={contextValue}>
                         <DragFileGrid/>
+                        <div className="add-to-store" onClick={this.addToStore}>
+                            <SvgIcon iconClass='icon-sure'/>
+                        </div>
                     </DragAddContext.Provider>
-                    <div className="add-to-store">
-                        <Button type='default' onClick={this.addToStore}>保存</Button>
-                    </div>
                 </div>
-                <Modal
-                    title="请填写名称"
-                    visible={this.state.nameDialogVisible}
-                    onOk={this.handleOk}
-                    onCancel={this.handleCancel}
-                >
-                    <Input placeholder='请输入曲谱名称' onInput={this.handleInputName} defaultValue={this.state.fileArr[0] && this.state.fileArr[0].name}/>
-                </Modal>
             </div>
         )
     }

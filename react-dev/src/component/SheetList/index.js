@@ -173,7 +173,9 @@ class LeftList extends React.Component {
                 {this.props.list.map((item, index) => {
                     return (
                         <div className='sheet-music-one' key={index}>
-                            <Link to={`/view/${index}`}>{item.name}</Link>
+                            <Link to={`/view/${index}`}>
+                            <SvgIcon iconClass='icon-gedan'/>
+                            {item.name}</Link>
                         </div>
                     )
                 })}
