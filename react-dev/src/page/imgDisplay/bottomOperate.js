@@ -1,4 +1,5 @@
 import React from 'react'
+import { Slider } from 'antd'
 import SvgIcon from '@/component/SvgIcon'
 
 class BottomOperate extends React.Component {
@@ -9,27 +10,26 @@ class BottomOperate extends React.Component {
         e.preventDefault()
         this.props.changeActiveCount(count)
     }
-    scale = (e, type) => {
-        e.preventDefault()
-        this.props.scale(type)
+    scale = (value) => {
+        let scaleNum = value > 0 ? value : 1 / value
+        this.props.scale(scaleNum)
     }
     render () {
         return (
             <div className='bottom-operate'>
-                <div className='bottom-operate-one' onClick={e => this.changeActiveCount(e, 1)}>
-                    一
+                <div className='bottom-operate-scale'>
+                    <Slider defaultValue={0} max={5} min={-5} onChange={this.scale}/>
                 </div>
-                <div className='bottom-operate-one' onClick={e => this.changeActiveCount(e, 2)}>
-                    二
-                </div>
-                <div className='bottom-operate-one' onClick={e => this.changeActiveCount(e, 3)}>
-                    三
-                </div>
-                <div className='bottom-operate-one' onClick={e => this.scale(e, 'blowUp')}>
-                    <SvgIcon iconClass='icon-blowup'/>
-                </div>
-                <div className='bottom-operate-one' onClick={e => this.scale(e, 'narrow')}>
-                    <SvgIcon iconClass='icon-narrow'/>
+                <div className='bottom-operate-page'>
+                    <span className='bottom-operate-page-one' onClick={e => this.changeActiveCount(e, 1)}>
+                        一
+                    </span>
+                    <span className='bottom-operate-page-one' onClick={e => this.changeActiveCount(e, 2)}>
+                        二
+                    </span>
+                    <span className='bottom-operate-page-one' onClick={e => this.changeActiveCount(e, 3)}>
+                        三
+                    </span>
                 </div>
             </div>
         )

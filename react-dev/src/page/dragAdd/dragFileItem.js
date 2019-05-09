@@ -15,7 +15,9 @@ class DragFileItem extends React.Component {
                     <SvgIcon iconClass='icon-close'/>
                 </span>
                 <img src={this.props.item.path}/>
-                <h5>{this.props.item.name}</h5>
+                <h5>
+                    <input defaultValue={this.props.item.name} type='text' onInput={e => this.context.updateFileName(e, this.props.index)}/>
+                </h5>
             </div>
         )
     }

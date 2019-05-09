@@ -37,18 +37,7 @@ class ImgDisplay extends React.Component {
             activeLeftIndex: activeLeftIndex >= fileCount - activeCount ? fileCount - activeCount : activeLeftIndex + activeCount
         })
     }
-    scale = (type) => {
-        let { scaleNum } = this.state
-        switch(type) {
-            case 'blowUp':
-                scaleNum += 0.2
-                break
-            case 'narrow':
-                scaleNum -= 0.2
-                break
-            default:
-                break
-        }
+    scale = (scaleNum) => {
         this.setState({
             scaleNum
         })
@@ -64,20 +53,27 @@ class ImgDisplay extends React.Component {
             return null
         }
         return (
-            <div className='img-view-container' style={{transform: 'scale(' + this.state.scaleNum + ')'}}>
-                {this.props.list[this.state.index].fileArr.slice(this.state.activeLeftIndex, this.state.activeCount + this.state.activeLeftIndex).map((item, index) => {
-                    return (
-                        <Draggable
-                            axis="both"
-                            handle='.img-one'
-                            scale={1}
-                            bounds="parent"
-                            key={index}
-                        >
-                            <img className='img-one' src={item.path}/>
-                        </Draggable>
-                    )
-                })}
+            <div className='img-view-container'>
+                <div className="img-view-title">
+                    <h3>
+                        {this.props.list[this.state.index].name}
+                    </h3>
+                </div>
+                <div className='img-view-display' style={{transform: 'scale(' + this.state.scaleNum + ')'}}>
+                    {this.props.list[this.state.index].fileArr.slice(this.state.activeLeftIndex, this.state.activeCount + this.state.activeLeftIndex).map((item, index) => {
+                        return (
+                            <Draggable
+                                axis="both"
+                                handle='.img-one'
+                                scale={1}
+                                bounds="parent"
+                                key={index}
+                            >
+                                <img className='img-one' src={item.path}/>
+                            </Draggable>
+                        )
+                    })}
+                </div>
             </div>
         )
     }

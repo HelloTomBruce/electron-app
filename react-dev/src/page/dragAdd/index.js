@@ -82,8 +82,14 @@ class DragAddFile extends React.Component {
             fileArr
         })
     }
+    updateFileName = (e, index) => {
+        e.preventDefault()
+        let value = e.target.value
+        this.setState({
+            [`fileArr[${index}].name`]: value
+        })
+    }
     onSortFiles = (fileArr) => {
-        console.log(fileArr)
         this.setState({
             fileArr
         })
@@ -92,6 +98,7 @@ class DragAddFile extends React.Component {
         const contextValue = {
             fileArr: this.state.fileArr,
             removeOne: this.removeOneImg,
+            updateFileName: this.updateFileName,
             onSortFiles: this.onSortFiles
         }
         return (

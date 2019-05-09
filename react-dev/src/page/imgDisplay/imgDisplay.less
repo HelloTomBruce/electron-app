@@ -7,6 +7,15 @@
         position: relative;
         text-align: center;
         overflow: auto;
+        .img-view-title {
+            h3 {
+                margin: 0;
+                line-height: 30px;
+                text-align: center;
+                font-size: 14px;
+                color: rgba(255, 255, 255, .5);
+            }
+        }
         img {
             margin: 10px;
             width: auto;
@@ -47,11 +56,23 @@
         width: 100%;
         display: flex;
         justify-content: center;
-        .bottom-operate-one {
-            width: 45px;
-            text-align: center;
-            font-size: 16px;
-            cursor: pointer;
+        align-items: center;
+        flex-flow: column wrap;
+        &-scale {
+            width: 35%;
+        }
+        &-page {
+            display: inline-flex;
+            justify-content: center;
+            flex-flow: row nowrap;
+            align-items: center;
+            &-one {
+                width: 45px;
+                text-align: center;
+                font-size: 16px;
+                cursor: pointer;
+                color: rgba(255, 255, 255, .5);
+            }
         }
     }
 }

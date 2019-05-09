@@ -47,17 +47,26 @@
             .img-file-one {
                 margin: 10px;
                 position: relative;
-                cursor: move;
+                transition: all 100ms linear;
                 h5 {
                     margin: 0;
-                    height: 20px;
-                    line-height: 20px;
-                    font-size: 14px;
-                    color: rgba(255, 255, 255, .5);
+                    input {
+                        height: 20px;
+                        background: transparent;
+                        border: none;
+                        line-height: 20px;
+                        font-size: 12px;
+                        color: rgba(255, 255, 255, .5);
+                        &:focus {
+                            outline: none;
+                            border-bottom: 1px solid #fff;
+                        }
+                    }
                 }
                 img {
                     width: 100px;
                     height: 150px;
+                    cursor: move;
                 }
                 .close-icon {
                     position: absolute;
