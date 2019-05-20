@@ -11,14 +11,14 @@ class BottomOperate extends React.Component {
         this.props.changeActiveCount(count)
     }
     scale = (value) => {
-        let scaleNum = value > 0 ? value : 1 / value
+        let scaleNum = value > 0 ? Math.abs(value) : Math.abs(1 / value)
         this.props.scale(scaleNum)
     }
     render () {
         return (
             <div className='bottom-operate'>
                 <div className='bottom-operate-scale'>
-                    <Slider defaultValue={0} max={5} min={-5} onChange={this.scale}/>
+                    <Slider defaultValue={0} max={5} min={-5} step={0.1} onChange={this.scale}/>
                 </div>
                 <div className='bottom-operate-page'>
                     <span className='bottom-operate-page-one' onClick={e => this.changeActiveCount(e, 1)}>

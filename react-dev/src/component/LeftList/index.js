@@ -35,9 +35,12 @@ class LeftList extends React.Component {
                     </span>
                 </div>
                 {leftIsHide ? null : <SheetList/> }
-                <div className="bottom-swiper">
-                    <CollectSwiper/>
-                </div>
+                {!leftIsHide ?
+                    <div className="bottom-swiper">
+                        <CollectSwiper/>
+                    </div>
+                    : null
+                }
             </div>
         )
     }
