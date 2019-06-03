@@ -25,6 +25,13 @@ class ImgDisplay extends React.Component {
             index: this.props.match.params.id
         })
     }
+    componentDidUpdate (prevProps) {
+        if (prevProps.match.params.id !== this.props.match.params.id) {
+            this.setState({
+                index: this.props.match.params.id
+            })
+        }
+    }
     prevImg = () => {
         this.setState({
             activeLeftIndex: this.state.activeLeftIndex <= 0 ? 0 : this.state.activeLeftIndex - this.state.activeCount

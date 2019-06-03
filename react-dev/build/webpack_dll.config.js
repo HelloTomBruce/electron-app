@@ -9,8 +9,7 @@ module.exports = {
             "react-router-dom",
             "react-redux",
             "redux",
-            "redux-saga",
-            "axios"
+            "redux-saga"
         ]
     },
     output: {

@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import { addOne } from '@/redux/action/musicSheet'
 import { message } from 'antd'
 import SvgIcon from '@/component/SvgIcon'
+import SearchImg from '@/component/SearchImg'
 import { DragAddContext } from './context'
 import DragFileGrid from './dragFileGrid'
-import './dragAdd.less'
+import './index.less'
 
 const mapStateToProps = () => ({})
 
@@ -94,6 +95,14 @@ class DragAddFile extends React.Component {
             fileArr
         })
     }
+    addImgFromSearch = (img) => {
+        this.setState({
+            fileArr: [...this.state.fileArr, {
+                name: img.name,
+                path: img.src
+            }]
+        })
+    }
     render () {
         const contextValue = {
             fileArr: this.state.fileArr,
@@ -104,6 +113,9 @@ class DragAddFile extends React.Component {
         return (
             <div className='add-music-sheet'>
                 <input type="text" defaultValue={this.state.name} onInput={this.handleInput} className='name-input'/>
+                <div className='add-music-search-img'>
+                    <SearchImg addImg={this.addImgFromSearch}/>
+                </div>
                 <div className='drag-container'
                     draggable={true}
                     onDragOver={this.handleDragEnd}

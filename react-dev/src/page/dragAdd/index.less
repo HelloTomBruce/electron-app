@@ -1,4 +1,5 @@
 .add-music-sheet {
+    position: relative;
     display: flex;
     flex-flow: column wrap;
     justify-content: flex-start;
@@ -6,8 +7,7 @@
     .name-input {
         display: block;
         height: 30px;
-        width: 100%;
-        padding: 0 20px;
+        margin: 0 350px 0 20px;
         line-height: 30px;
         background: transparent;
         border: none;
@@ -18,6 +18,12 @@
             border-bottom: 1px solid #fff;
             color: #fff;
         }
+    }
+    .add-music-search-img {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        z-index: 2;
     }
     .drag-container {
         position: relative;
